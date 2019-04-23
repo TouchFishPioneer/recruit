@@ -20,7 +20,6 @@ public class TeacherDetail {
     private String teacherDepartment;
     private String teacherDuty;
     private String teacherGraduatedSchool;
-    private String teacherRegion;
     private String teacherRemarks;
     private String teacherUuid;
 }
