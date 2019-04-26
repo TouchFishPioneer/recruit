@@ -51,8 +51,11 @@ public class StudentDetailParser {
         if (studentDetailForm.getGrade() != null)
             studentDetail.setStudentGrade(studentDetailForm.getGrade());
 
-        if (studentDetailForm.getUuid() != null)
-            studentDetail.setStudentUuid(studentDetailForm.getUuid());
+        if (studentDetailForm.getInfo_source() != null)
+            studentDetail.setStudentInfoSource(studentDetailForm.getInfo_source());
 
+        if (studentDetailForm.getContact_status() != null) {
+            studentDetail.setStudentContactStatus(studentDetailForm.getContact_status());
+        }
     }
 }

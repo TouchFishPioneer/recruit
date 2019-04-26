@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/student/information")
+@RequestMapping("/student/info")
 public class StudentInformationController {
 
     private final StudentInformationService studentInformationService;
@@ -24,42 +24,48 @@ public class StudentInformationController {
         this.studentInformationService = studentInformationService;
     }
 
-    @GetMapping("/list")
-    public ResultVO list(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                         @RequestParam(value = "size", defaultValue = "20") Integer size) {
-        Page<StudentDetail> studentDetailPage = studentInformationService.findAll(PageRequest.of(page, size));
+    @GetMapping("/index")
+    public ResultVO listStudentDetail(@RequestParam(value = "page", defaultValue = "0") Integer page,
+                                      @RequestParam(value = "size", defaultValue = "20") Integer size) {
+        Page<StudentDetail> studentDetailPage = studentInformationService.listStudentDetail(PageRequest.of(page, size));
         return ResultVO.success(studentDetailPage.getContent());
     }
 
-    @GetMapping("/index")
-    public ResultVO findStudentDetail(@RequestParam(value = "uuid") String studentUuid) {
-        StudentDetail studentDetail = studentInformationService.findOne(studentUuid);
+    @GetMapping("/index/{uuid}")
+    public ResultVO findStudentDetail(@PathVariable(value = "uuid") String studentUuid) {
+        StudentDetail studentDetail = studentInformationService.findStudentDetail(studentUuid);
         return ResultVO.success(studentDetail);
     }
 
     @PostMapping("/index")
-    public ResultVO updateStudentDetail(@Valid StudentDetailForm studentDetailForm, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult);
+    public ResultVO createStudentDetail(@Valid StudentDetailForm studentDetailForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
             throw new RecruitException(ExceptionStatusEnum.INPUT_PARAMS_ERROR);
-        }
 
-        StudentDetail studentDetail;
+        StudentDetail studentDetail = new StudentDetail();
         StudentDetail result;
+        StudentDetailParser.formParser(studentDetailForm, studentDetail);
         try {
-            studentDetail = studentInformationService.findOne(studentDetailForm.getUuid());
-            StudentDetailParser.formParser(studentDetailForm, studentDetail);
+            result = studentInformationService.createStudentDetail(studentDetail);
+        } catch (RecruitException e) {
+            return ResultVO.error(403, "FORBIDDEN");
+        }
+        return ResultVO.success(result);
+    }
+
+    @PatchMapping("/index")
+    public ResultVO updateStudentDetail(@Valid StudentDetailForm studentDetailForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            throw new RecruitException(ExceptionStatusEnum.INPUT_PARAMS_ERROR);
+
+        StudentDetail studentDetail = studentInformationService.findStudentDetail(studentDetailForm.getUuid());
+        StudentDetail result;
+        StudentDetailParser.formParser(studentDetailForm, studentDetail);
+        try {
             result = studentInformationService.updateStudentDetail(studentDetail);
         } catch (RecruitException e) {
             return ResultVO.error(404, "NOT FOUND");
         }
-
         return ResultVO.success(result);
-    }
-
-    @PostMapping("/source")
-    public ResultVO updateInfoSource(@RequestParam(value = "source") Integer studentInfoSource) {
-
     }
 }

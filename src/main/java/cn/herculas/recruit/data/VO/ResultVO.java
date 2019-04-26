@@ -11,7 +11,7 @@ public class ResultVO<T> {
     public static ResultVO success(Object object) {
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(200);
-        resultVO.setMessage("Success");
+        resultVO.setMessage("success");
         resultVO.setData(object);
         return resultVO;
     }

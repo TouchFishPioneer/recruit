@@ -5,6 +5,7 @@ import cn.herculas.recruit.enumeration.ExceptionStatusEnum;
 import cn.herculas.recruit.exception.RecruitException;
 import cn.herculas.recruit.repository.StudentDetailRepository;
 import cn.herculas.recruit.service.StudentInformationService;
+import cn.herculas.recruit.util.generator.KeyGenerator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,10 @@ public class StudentInformationServiceImpl implements StudentInformationService 
         if (studentDetailRepository.findByStudentIdentityNumber(studentDetail.getStudentIdentityNumber()) != null ||
                 studentDetailRepository.findByStudentAdmissionNumber(studentDetail.getStudentAdmissionNumber()) != null)
             throw new RecruitException(ExceptionStatusEnum.STUDENT_ALREADY_EXIST);
+
+        if (studentDetail.getStudentUuid() == null)
+            studentDetail.setStudentUuid(KeyGenerator.uuidGenerator());
+
         return studentDetailRepository.save(studentDetail);
     }
 
@@ -30,16 +35,20 @@ public class StudentInformationServiceImpl implements StudentInformationService 
     public StudentDetail updateStudentDetail(StudentDetail studentDetail) {
         if (studentDetailRepository.findByStudentUuid(studentDetail.getStudentUuid()) == null)
             throw new RecruitException(ExceptionStatusEnum.STUDENT_NOT_EXIST);
+
         return studentDetailRepository.save(studentDetail);
     }
 
     @Override
-    public Page<StudentDetail> findAll(Pageable pageable) {
+    public Page<StudentDetail> listStudentDetail(Pageable pageable) {
         return studentDetailRepository.findAll(pageable);
     }
 
     @Override
-    public StudentDetail findOne(String studentUuid) {
+    public StudentDetail findStudentDetail(String studentUuid) {
+        if (studentDetailRepository.findByStudentUuid(studentUuid) == null)
+            throw new RecruitException(ExceptionStatusEnum.STUDENT_NOT_EXIST);
+
         return studentDetailRepository.findByStudentUuid(studentUuid);
     }
 }

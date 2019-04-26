@@ -8,10 +8,12 @@ import java.util.Date;
 @Data
 public class StudentDetailForm {
     private String name;
-    private Boolean gender;
+    private Integer gender;
     private String tel;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
+
     private String identity_number;
     private String admission_number;
     private String region;
@@ -24,4 +26,9 @@ public class StudentDetailForm {
     private String unintentional_major;
     private Integer grade;
     private String uuid;
+
+    private Integer info_source;
+    private Integer contact_status;
+
+
 }

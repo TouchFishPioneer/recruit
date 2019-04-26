@@ -7,6 +7,6 @@ import org.springframework.data.domain.Pageable;
 public interface StudentInformationService {
     StudentDetail createStudentDetail(StudentDetail studentDetail);
     StudentDetail updateStudentDetail(StudentDetail studentDetail);
-    Page<StudentDetail> findAll(Pageable pageable);
-    StudentDetail findOne(String studentUuid);
+    Page<StudentDetail> listStudentDetail(Pageable pageable);
+    StudentDetail findStudentDetail(String studentUuid);
 }
