@@ -4,58 +4,29 @@ import cn.herculas.recruit.data.DO.StudentDetail;
 import cn.herculas.recruit.form.StudentDetailForm;
 
 public class StudentDetailParser {
-    public static void formParser(StudentDetailForm studentDetailForm, StudentDetail studentDetail) {
+    public static StudentDetail formParser(StudentDetailForm studentDetailForm) {
+        StudentDetail studentDetail = new StudentDetail();
 
-        if (studentDetailForm.getName() != null)
-            studentDetail.setStudentName(studentDetailForm.getName());
+        studentDetail.setStudentName(studentDetailForm.getName());
+        studentDetail.setStudentGender(studentDetailForm.getGender());
+        studentDetail.setStudentTel(studentDetailForm.getTel());
+        studentDetail.setStudentBirthday(studentDetailForm.getBirthday());
+        studentDetail.setStudentIdentityNumber(studentDetailForm.getIdentity_number());
+        studentDetail.setStudentAdmissionNumber(studentDetailForm.getAdmission_number());
+        studentDetail.setStudentRegion(studentDetailForm.getRegion());
+        studentDetail.setStudentSchool(studentDetailForm.getSchool());
+        studentDetail.setStudentMark(studentDetailForm.getMark());
+        studentDetail.setStudentDivision(studentDetailForm.getDivision());
+        studentDetail.setStudentRank(studentDetailForm.getRank());
+        studentDetail.setStudentRemarks(studentDetailForm.getRemarks());
 
-        if (studentDetailForm.getGender() != null)
-            studentDetail.setStudentGender(studentDetailForm.getGender());
+        studentDetail.setStudentInfoSource(studentDetailForm.getInfo_source());
+        studentDetail.setStudentContactStatus(studentDetailForm.getContact_status());
 
-        if (studentDetailForm.getTel() != null)
-            studentDetail.setStudentTel(studentDetailForm.getTel());
+        studentDetail.setStudentIntentionalMajor(studentDetailForm.getIntentional_major());
+        studentDetail.setStudentUnintentionalMajor(studentDetailForm.getUnintentional_major());
+        studentDetail.setStudentGrade(studentDetailForm.getGrade());
 
-        if (studentDetailForm.getBirthday() != null)
-            studentDetail.setStudentBirthday(studentDetailForm.getBirthday());
-
-        if (studentDetailForm.getIdentity_number() != null)
-            studentDetail.setStudentIdentityNumber(studentDetailForm.getIdentity_number());
-
-        if (studentDetailForm.getAdmission_number() != null)
-            studentDetail.setStudentAdmissionNumber(studentDetailForm.getAdmission_number());
-
-        if (studentDetailForm.getRegion() != null)
-            studentDetail.setStudentRegion(studentDetailForm.getRegion());
-
-        if (studentDetailForm.getSchool() != null)
-            studentDetail.setStudentSchool(studentDetailForm.getSchool());
-
-        if (studentDetailForm.getMark() != null)
-            studentDetail.setStudentMark(studentDetailForm.getMark());
-
-        if (studentDetailForm.getDivision() != null)
-            studentDetail.setStudentDivision(studentDetailForm.getDivision());
-
-        if (studentDetailForm.getRank() != null)
-            studentDetail.setStudentRank(studentDetailForm.getRank());
-
-        if (studentDetailForm.getRemarks() != null)
-            studentDetail.setStudentRemarks(studentDetailForm.getRemarks());
-
-        if (studentDetailForm.getIntentional_major() != null)
-            studentDetail.setStudentIntentionalMajor(studentDetailForm.getIntentional_major());
-
-        if (studentDetailForm.getUnintentional_major() != null)
-            studentDetail.setStudentUnintentionalMajor(studentDetailForm.getUnintentional_major());
-
-        if (studentDetailForm.getGrade() != null)
-            studentDetail.setStudentGrade(studentDetailForm.getGrade());
-
-        if (studentDetailForm.getInfo_source() != null)
-            studentDetail.setStudentInfoSource(studentDetailForm.getInfo_source());
-
-        if (studentDetailForm.getContact_status() != null) {
-            studentDetail.setStudentContactStatus(studentDetailForm.getContact_status());
-        }
+        return studentDetail;
     }
 }

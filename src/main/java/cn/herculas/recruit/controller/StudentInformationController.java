@@ -7,6 +7,7 @@ import cn.herculas.recruit.exception.RecruitException;
 import cn.herculas.recruit.form.StudentDetailForm;
 import cn.herculas.recruit.service.StudentInformationService;
 import cn.herculas.recruit.util.parser.StudentDetailParser;
+import cn.herculas.recruit.util.replicator.PropertyReplicator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.validation.BindingResult;
@@ -33,7 +34,12 @@ public class StudentInformationController {
 
     @GetMapping("/index/{uuid}")
     public ResultVO findStudentDetail(@PathVariable(value = "uuid") String studentUuid) {
-        StudentDetail studentDetail = studentInformationService.findStudentDetail(studentUuid);
+        StudentDetail studentDetail;
+        try {
+            studentDetail = studentInformationService.findStudentDetail(studentUuid);
+        } catch (RecruitException e) {
+            return ResultVO.error(404, "NOT FOUND");
+        }
         return ResultVO.success(studentDetail);
     }
 
@@ -42,9 +48,9 @@ public class StudentInformationController {
         if (bindingResult.hasErrors())
             throw new RecruitException(ExceptionStatusEnum.INPUT_PARAMS_ERROR);
 
-        StudentDetail studentDetail = new StudentDetail();
+        StudentDetail studentDetail = StudentDetailParser.formParser(studentDetailForm);
         StudentDetail result;
-        StudentDetailParser.formParser(studentDetailForm, studentDetail);
+
         try {
             result = studentInformationService.createStudentDetail(studentDetail);
         } catch (RecruitException e) {
@@ -59,8 +65,11 @@ public class StudentInformationController {
             throw new RecruitException(ExceptionStatusEnum.INPUT_PARAMS_ERROR);
 
         StudentDetail studentDetail = studentInformationService.findStudentDetail(studentDetailForm.getUuid());
+        StudentDetail studentDetailParams = StudentDetailParser.formParser(studentDetailForm);
+
+        PropertyReplicator.copyPropertiesIgnoreNull(studentDetailParams, studentDetail);
         StudentDetail result;
-        StudentDetailParser.formParser(studentDetailForm, studentDetail);
+
         try {
             result = studentInformationService.updateStudentDetail(studentDetail);
         } catch (RecruitException e) {
