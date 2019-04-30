@@ -15,7 +15,7 @@ public class TeacherDetail {
     private Integer teacherId;
     private String teacherName;
     private String teacherCardNumber;
-    private Boolean teacherGender;
+    private Integer teacherGender;
     private String teacherTel;
     private String teacherDepartment;
     private String teacherDuty;
