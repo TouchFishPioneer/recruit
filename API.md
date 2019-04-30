@@ -7,7 +7,7 @@
    Request
     
    ```http request
-    GET info/student/index?page=0&size=20
+   GET info/student/index?page=0&size=20
    ```
    
    Response
@@ -152,7 +152,7 @@
     name: "李轩"
     uuid: "53e27903a13b4eabb4fd69f8455a60e3"
     ```
-    > Tip: you do not need to pass all the fields of one student but only pass the field(s) which you want to update
+    > Tip: you do not need to pass all the fields of one student but only pass the field(s) which you want to update.
     
     Response
     
@@ -325,7 +325,8 @@
     remarks: 研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。
     uuid: e4181666db2e4499a9f18aaab49b7fd5
     ```
-    
+    > Tip: Just like student side, you do not need to pass all the fields of one teacher but only pass the field(s) which you want to update.
+
     Response
     
     ```json
@@ -387,7 +388,7 @@
     captcha_code:
     ```
     
-    Response:
+    Response
     
 3. Teacher get detail information
     
