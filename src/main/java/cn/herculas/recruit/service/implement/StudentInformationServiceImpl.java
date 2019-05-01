@@ -46,9 +46,9 @@ public class StudentInformationServiceImpl implements StudentInformationService 
 
     @Override
     public StudentDetail findStudentDetail(String studentUuid) {
-        if (studentDetailRepository.findByStudentUuid(studentUuid) == null)
+        StudentDetail studentDetail = studentDetailRepository.findByStudentUuid(studentUuid);
+        if (studentDetail == null)
             throw new RecruitException(ExceptionStatusEnum.STUDENT_NOT_EXIST);
-
-        return studentDetailRepository.findByStudentUuid(studentUuid);
+        return studentDetail;
     }
 }

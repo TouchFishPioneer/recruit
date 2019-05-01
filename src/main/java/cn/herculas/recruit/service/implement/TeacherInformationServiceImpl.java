@@ -45,9 +45,9 @@ public class TeacherInformationServiceImpl implements TeacherInformationService 
 
     @Override
     public TeacherDetail findTeacherDetail(String teacherUuid) {
-        if (teacherDetailRepository.findByTeacherUuid(teacherUuid) == null)
+        TeacherDetail teacherDetail = teacherDetailRepository.findByTeacherUuid(teacherUuid);
+        if (teacherDetail == null)
             throw new RecruitException(ExceptionStatusEnum.TEACHER_NOT_EXIST);
-
-        return teacherDetailRepository.findByTeacherUuid(teacherUuid);
+        return teacherDetail;
     }
 }

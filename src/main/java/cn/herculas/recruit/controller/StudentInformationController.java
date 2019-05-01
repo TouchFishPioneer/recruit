@@ -45,9 +45,8 @@ public class StudentInformationController {
             StudentDetail studentDetail = studentInformationService.findStudentDetail(studentUuid);
             return ResultVO.success(studentDetail);
         } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase());
+            return ResultVO.error(HttpStatus.NOT_FOUND);
         }
-
     }
 
     @PostMapping("/index")
@@ -56,7 +55,7 @@ public class StudentInformationController {
         // TODO: Permission Check
 
         if (bindingResult.hasErrors())
-            throw new RecruitException(ExceptionStatusEnum.INPUT_PARAMS_ERROR);
+            return ResultVO.error(HttpStatus.BAD_REQUEST);
 
         StudentDetail studentDetail = StudentDetailParser.formParser(studentDetailForm);
 
@@ -64,7 +63,7 @@ public class StudentInformationController {
             StudentDetail result = studentInformationService.createStudentDetail(studentDetail);
             return ResultVO.success(result);
         } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.FORBIDDEN.value(), HttpStatus.FORBIDDEN.getReasonPhrase());
+            return ResultVO.error(HttpStatus.FORBIDDEN);
         }
     }
 
@@ -74,14 +73,14 @@ public class StudentInformationController {
         // TODO: Permission Check
 
         if (bindingResult.hasErrors())
-            throw new RecruitException(ExceptionStatusEnum.INPUT_PARAMS_ERROR);
+            return ResultVO.error(HttpStatus.BAD_REQUEST);
 
         StudentDetail studentDetail;
 
         try {
             studentDetail = studentInformationService.findStudentDetail(studentDetailForm.getUuid());
         } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase());
+            return ResultVO.error(HttpStatus.NOT_FOUND);
         }
 
         StudentDetail studentDetailParams = StudentDetailParser.formParser(studentDetailForm);
@@ -91,7 +90,7 @@ public class StudentInformationController {
             StudentDetail result = studentInformationService.updateStudentDetail(studentDetail);
             return ResultVO.success(result);
         } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.FORBIDDEN.value(), HttpStatus.FORBIDDEN.getReasonPhrase());
+            return ResultVO.error(HttpStatus.FORBIDDEN);
         }
     }
 }

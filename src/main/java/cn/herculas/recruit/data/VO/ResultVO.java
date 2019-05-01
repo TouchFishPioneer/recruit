@@ -1,6 +1,7 @@
 package cn.herculas.recruit.data.VO;
 
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 @Data
 public class ResultVO<T> {
@@ -26,5 +27,9 @@ public class ResultVO<T> {
         resultVO.setMessage(message);
         resultVO.setData(null);
         return resultVO;
+    }
+
+    public static ResultVO error(HttpStatus httpStatus) {
+        return ResultVO.error(httpStatus.value(), httpStatus.getReasonPhrase());
     }
 }

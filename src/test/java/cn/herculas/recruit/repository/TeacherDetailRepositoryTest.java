@@ -22,7 +22,7 @@ public class TeacherDetailRepositoryTest {
 
         teacherDetail.setTeacherName("宋宇波波");
         teacherDetail.setTeacherCardNumber("120499872");
-        teacherDetail.setTeacherGender(true);
+        teacherDetail.setTeacherGender(1);
         teacherDetail.setTeacherTel("13851884333");
         teacherDetail.setTeacherDepartment("57");
         teacherDetail.setTeacherDuty("副教授");

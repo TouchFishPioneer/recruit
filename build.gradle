@@ -26,5 +26,6 @@ dependencies {
 	implementation 'mysql:mysql-connector-java'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'com.github.penggle:kaptcha:2.3.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

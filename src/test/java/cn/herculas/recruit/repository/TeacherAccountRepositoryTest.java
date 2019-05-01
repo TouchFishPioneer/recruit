@@ -22,7 +22,7 @@ public class TeacherAccountRepositoryTest {
 
         teacherAccount.setTeacherUsername("wurahara");
         teacherAccount.setTeacherPassword("19941120");
-        teacherAccount.setTeacherStatus(true);
+        teacherAccount.setTeacherStatus(1);
         teacherAccount.setTeacherRegion("332210");
         teacherAccount.setTeacherAvatar("http://avatar.jpg");
         teacherAccount.setTeacherUuid(KeyGenerator.uuidGenerator());

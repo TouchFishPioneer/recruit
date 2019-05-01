@@ -45,7 +45,7 @@ public class TeacherInformationController {
             TeacherDetail teacherDetail = teacherInformationService.findTeacherDetail(teacherUuid);
             return ResultVO.success(teacherDetail);
         } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase());
+            return ResultVO.error(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -55,7 +55,7 @@ public class TeacherInformationController {
         // TODO: Permission Check
 
         if (bindingResult.hasErrors())
-            throw new RecruitException(ExceptionStatusEnum.INPUT_PARAMS_ERROR);
+            return ResultVO.error(HttpStatus.BAD_REQUEST);
 
         TeacherDetail teacherDetail = TeacherDetailParser.formParser(teacherDetailForm);
 
@@ -63,7 +63,7 @@ public class TeacherInformationController {
             TeacherDetail result = teacherInformationService.createTeacherDetail(teacherDetail);
             return ResultVO.success(result);
         } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.FORBIDDEN.value(), HttpStatus.FORBIDDEN.getReasonPhrase());
+            return ResultVO.error(HttpStatus.FORBIDDEN);
         }
     }
 
@@ -73,14 +73,14 @@ public class TeacherInformationController {
         // TODO: Permission Check
 
         if (bindingResult.hasErrors())
-            throw new RecruitException(ExceptionStatusEnum.INPUT_PARAMS_ERROR);
+            return ResultVO.error(HttpStatus.BAD_REQUEST);
 
         TeacherDetail teacherDetail;
 
         try {
             teacherDetail = teacherInformationService.findTeacherDetail(teacherDetailForm.getUuid());
         } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase());
+            return ResultVO.error(HttpStatus.NOT_FOUND);
         }
 
         TeacherDetail teacherDetailParams = TeacherDetailParser.formParser(teacherDetailForm);
@@ -90,7 +90,7 @@ public class TeacherInformationController {
             TeacherDetail result = teacherInformationService.updateTeacherDetail(teacherDetail);
             return ResultVO.success(result);
         } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.FORBIDDEN.value(), HttpStatus.FORBIDDEN.getReasonPhrase());
+            return ResultVO.error(HttpStatus.FORBIDDEN);
         }
     }
 }

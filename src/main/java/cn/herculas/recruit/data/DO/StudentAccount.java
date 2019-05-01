@@ -15,6 +15,6 @@ public class StudentAccount {
     private Integer studentAccountId;
     private String studentEmail;
     private String studentPassword;
-    private Boolean studentStatus;
+    private Integer studentStatus;
     private String studentUuid;
 }

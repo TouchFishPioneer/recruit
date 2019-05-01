@@ -5,9 +5,9 @@
 1. Get the list of students
 
    Request
-    
+   
    ```http request
-   GET info/student/index?page=0&size=20
+   GET /info/student/index?page=0&size=20
    ```
    
    Response
@@ -325,7 +325,7 @@
     remarks: 研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。
     uuid: e4181666db2e4499a9f18aaab49b7fd5
     ```
-    > Tip: Just like student side, you do not need to pass all the fields of one teacher but only pass the field(s) which you want to update.
+    > Tip: Just like the student side, you do not need to pass all the fields of one teacher but only pass the field(s) which you want to update.
 
     Response
     
@@ -350,12 +350,12 @@
 
 ### Login and Logout
 
-1. Get the uuid of the captcha
+1. Get the storage key of the captcha
 
     Request
     
     ```http request
-    GET /log/teacher/captcha
+    GET /log/teacher/captcha/key
     ```
     
     Response
@@ -363,15 +363,26 @@
     ```json
     {
         "code": 200,
-        "message": "验证码生成成功，请请求验证码图片",
+        "message": "success",
         "data": {
-            "captcha": "CAPTCHA_KEY_PREFIX_2740a82195"
+            "captcha_key": "CAPTCHA_94d051d544"
         }
-        
     }
     ```
+    
+2. Get the image of the captcha
 
-2. Teacher login and get the token
+    Request
+    
+    ```http request
+    GET /log/teacher/captcha/image?key=CAPTCHA_94d051d544
+    ```
+    
+    Response
+    
+    A captcha image in JPEG format
+
+3. Teacher login and get the token
     
     Request
     
@@ -382,15 +393,25 @@
     Parameters
     
     ```http request
-    username: 
-    password:
-    captcha_uuid:
-    captcha_code:
+    username: wurahara
+    password: 19901919
+    captcha_key: CAPTCHA_94d051d544
+    captcha_content: 8y9e1
     ```
     
     Response
     
-3. Teacher get detail information
+    ```json
+    {
+        "code": 200,
+        "message": "success",
+        "data": {
+            "token": "e4181666db2e4499a9f18aaab49b7fd5"
+        }
+    }
+    ```
+    
+4. Teacher get detail information
     
     Request
     
@@ -400,7 +421,7 @@
     
     Response
     
-4. Teacher logout
+5. Teacher logout
     
     Request
     

@@ -22,7 +22,7 @@ public class StudentAccountRepositoryTest {
 
         studentAccount.setStudentEmail("wurahara@163.com");
         studentAccount.setStudentPassword("19941120");
-        studentAccount.setStudentStatus(true);
+        studentAccount.setStudentStatus(1);
         studentAccount.setStudentUuid(KeyGenerator.uuidGenerator());
 
         StudentAccount result = studentAccountRepository.save(studentAccount);
