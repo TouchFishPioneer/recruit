@@ -9,12 +9,11 @@ public enum StudentContactStatusEnum {
     CONTACTED_NEGATIVE(2, "have been reached and confirm not coming"),
     CONTACTED_POSITIVE(3, "have been reached and signed the contract");
 
+    private Integer code;
+    private String description;
 
-    private Integer studentContactStatusCode;
-    private String contactStatusDescription;
-
-    StudentContactStatusEnum(Integer studentContactStatusCode, String contactStatusDescription) {
-        this.studentContactStatusCode = studentContactStatusCode;
-        this.contactStatusDescription = contactStatusDescription;
+    StudentContactStatusEnum(Integer code, String description) {
+        this.code = code;
+        this.description = description;
     }
 }

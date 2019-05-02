@@ -7,11 +7,11 @@ public enum GenderEnum {
     FEMALE(0, "female"),
     MALE(1, "male");
 
-    private Integer genderCode;
-    private String genderDescription;
+    private Integer code;
+    private String description;
 
-    GenderEnum(Integer genderCode, String genderDescription) {
-        this.genderCode = genderCode;
-        this.genderDescription = genderDescription;
+    GenderEnum(Integer code, String description) {
+        this.code = code;
+        this.description = description;
     }
 }

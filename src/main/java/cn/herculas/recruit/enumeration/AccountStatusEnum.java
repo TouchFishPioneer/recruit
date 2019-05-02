@@ -7,11 +7,11 @@ public enum AccountStatusEnum {
     DISABLED(0, "This account is disabled."),
     VALID(1, "This account is valid.");
 
-    private Integer accountStatusCode;
-    private String accountStatusDescription;
+    private Integer code;
+    private String description;
 
-    AccountStatusEnum(Integer accountStatusCode, String accountStatusDescription) {
-        this.accountStatusCode = accountStatusCode;
-        this.accountStatusDescription = accountStatusDescription;
+    AccountStatusEnum(Integer code, String description) {
+        this.code = code;
+        this.description = description;
     }
 }

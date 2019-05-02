@@ -6,8 +6,8 @@ public class RecruitException extends RuntimeException {
     private Integer exceptionCode;
 
     public RecruitException(ExceptionStatusEnum exceptionStatusEnum) {
-        super(exceptionStatusEnum.getStatusDescription());
-        this.exceptionCode = exceptionStatusEnum.getResultStatusCode();
+        super(exceptionStatusEnum.getDescription());
+        this.exceptionCode = exceptionStatusEnum.getCode();
     }
 
     public RecruitException(Integer exceptionCode, String message) {

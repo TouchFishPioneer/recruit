@@ -15,6 +15,7 @@ public class StudentAccount {
     private Integer studentAccountId;
     private String studentEmail;
     private String studentPassword;
+    private String studentNickname;
     private Integer studentStatus;
     private String studentUuid;
 }

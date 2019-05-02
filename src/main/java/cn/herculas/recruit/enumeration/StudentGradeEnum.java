@@ -8,11 +8,11 @@ public enum StudentGradeEnum {
     GRADE_ELEVEN(2, "junior"),
     GRADE_TWELVE(3, "senior");
 
-    private Integer studentGradeCode;
-    private String gradeDescription;
+    private Integer code;
+    private String description;
 
-    StudentGradeEnum(Integer studentGradeCode, String gradeDescription) {
-        this.studentGradeCode = studentGradeCode;
-        this.gradeDescription = gradeDescription;
+    StudentGradeEnum(Integer code, String description) {
+        this.code = code;
+        this.description = description;
     }
 }

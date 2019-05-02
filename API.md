@@ -4,13 +4,13 @@
 
 1. Get the list of students
 
-   Request
+   **Request**
    
    ```http request
    GET /info/student/index?page=0&size=20
    ```
    
-   Response
+   **Response**
    
    ```json
    {
@@ -44,13 +44,13 @@
    
 2. Get the information of a specific student
 
-    Request
+    **Request**
     
     ```http request
     GET /info/student/index/{uuid}
     ```
     
-    Response
+    **Response**
     
     ```json
     {
@@ -82,13 +82,13 @@
 
 3. Create a new record of student
     
-    Request
+    **Request**
     
     ```http request
     POST /info/student/index
     ```
     
-    Parameters
+    **Parameters**
     
     ```http request
     name: 石伟
@@ -98,7 +98,7 @@
     identity_number: 320805199510151257
     admission_number: 1341561565646498158478
     region: 320805
-    school: 江苏省如皋中学
+    school: 江苏省如皋中学
     mark: 385
     division: 1
     rank: 1500
@@ -108,7 +108,7 @@
     grade: 3
     ```
     
-    Response
+    **Response**
     
     ```json
     {
@@ -140,13 +140,13 @@
 
 4. Update a record of specific student
     
-    Request
+    **Request**
     
     ```http request
     PATCH /info/student/index
     ```
     
-    Parameters
+    **Parameters**
     
     ```http request
     name: "李轩"
@@ -154,7 +154,7 @@
     ```
     > Tip: you do not need to pass all the fields of one student but only pass the field(s) which you want to update.
     
-    Response
+    **Response**
     
     ```json
     {
@@ -188,13 +188,13 @@
 
 1. Get the list of teachers
     
-    Request
+    **Request**
     
     ```http request
     GET /info/teacher/index?page=0&size=20
     ```
     
-    Response
+    **Response**
     
     ```json
     {
@@ -243,13 +243,13 @@
     
 2. Get the information of a specific teacher
 
-    Request
+    **Request**
     
     ```http request
     GET /info/teacher/index/{uuid}
     ```
     
-    Response
+    **Response**
     
     ```json
     {
@@ -272,13 +272,13 @@
     
 3. Create a new record of teacher
     
-    Request
+    **Request**
     
     ```http request
     POST /info/teacher/index
     ```
     
-    Parameters
+    **Parameters**
     
     ```http request
     name: 胡爱群
@@ -291,7 +291,8 @@
     remarks: 研究领域：无线网络安全、物理层安全技术。
     ```
     
-    Response
+    **Response**
+    
     ```json
     {
         "code": 200,
@@ -313,13 +314,13 @@
 
 4. Update a record of specific teacher
 
-    Request
+    **Request**
     
     ```http request
     PATCH /info/teacher/index
     ```
     
-    Parameters
+    **Parameters**
     
     ```http request
     remarks: 研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。
@@ -327,7 +328,7 @@
     ```
     > Tip: Just like the student side, you do not need to pass all the fields of one teacher but only pass the field(s) which you want to update.
 
-    Response
+    **Response**
     
     ```json
     {
@@ -348,17 +349,25 @@
     }
     ```
 
-### Login and Logout
+### Student Login and Logout
+
+1. Student login and get the token
+
+2. Get detail student account information
+
+3. Student logout
+
+### Teacher Login and Logout
 
 1. Get the storage key of the captcha
 
-    Request
+    **Request**
     
     ```http request
     GET /log/teacher/captcha/key
     ```
     
-    Response
+    **Response**
     
     ```json
     {
@@ -372,92 +381,134 @@
     
 2. Get the image of the captcha
 
-    Request
+    **Request**
     
     ```http request
     GET /log/teacher/captcha/image?key=CAPTCHA_94d051d544
     ```
     
-    Response
+    **Response**
     
-    A captcha image in JPEG format
+    _A captcha image in JPEG format_
 
 3. Teacher login and get the token
     
-    Request
+    **Request**
     
     ```http request
     POST /log/teacher/in
     ```
     
-    Parameters
+    **Parameters**
     
     ```http request
-    username: wurahara
+    username: boboalis
     password: 19901919
-    captcha_key: CAPTCHA_94d051d544
-    captcha_content: 8y9e1
+    captcha_key: CAPTCHA_ffc5a94236
+    captcha_content: 4g3xp
     ```
     
-    Response
+    **Response**
     
     ```json
     {
         "code": 200,
         "message": "success",
         "data": {
-            "token": "e4181666db2e4499a9f18aaab49b7fd5"
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNydWl0Iiwic3ViIjoiYm9ib2FsaXMiLCJpYXQiOjE1NTY3ODU2MDgsImV4cCI6MTU1NjgyODgwOH0.JxE0LOKQH4uhr-i3BARJoqiDXbfcnyfwoV2Dswehnn4"
         }
     }
     ```
     
-4. Teacher get detail information
+4. Get detail teacher account information
     
-    Request
+    **Request**
     
     ```http request
     GET /log/teacher/info
     ```
     
-    Response
+    **Parameters**
+    
+    ```http request
+    cookie: token=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNydWl0Iiwic3ViIjoiYm9ib2FsaXMiLCJpYXQiOjE1NTY3ODYzNzcsImV4cCI6MTU1NjgyOTU3N30.AeUFZV7wbpRCvc270W9zAWcsONrf8qjtGJMUttykQrI
+    ```
+    > The parameter of this interface should be in the cookies.
+    
+    **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success",
+        "data": {
+            "username": "boboalis",
+            "nickname": "bobo",
+            "role": 0,
+            "status": 1,
+            "region": "000000",
+            "avatar": "1",
+            "uuid": "dasdsdawda"
+        }
+    }
+    ```
     
 5. Teacher logout
     
-    Request
+    **Request**
     
     ```http request
     POST /log/teacher/out
     ```
     
-    Response
+    **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success"
+    }
+    ```
+    
+### Student Account Management
+
+1. Create a new student account
+
+2. Update the account of a specific student
+
+### Teacher Account Management
+
+1. Create a new teacher account
+
+2. Update the account of a specific teacher
 
 ### Question and Answer
 
 1. Get the list of questions
 
-    Request
+    **Request**
     
     ```http request
     GET /interactive/question/index
     ```
     
-    Response
+    **Response**
 
 2. Student create a new question
 
-    Request
+    **Request**
     
     ```http request
     POST /interactive/question/index
     ```
     
-    Parameters
+    **Parameters**
     
-    Response
+    **Response**
     
 3. Teacher review and validate the question
  
-    Request
+    **Request**
     
     ```http request
     PATCH /interactive/question/index/review/{uuid}
@@ -465,101 +516,101 @@
    
 4. Teacher answer a specific question
 
-    Request
+    **Request**
     
     ```http request
     PATCH /interactive/question/index/answer/{uuid}
     ```
     
-    Parameters
+    **Parameters**
     
-    Response
+    **Response**
 
 
 ### Notification
 
 1. Get the list of notifications
 
-    Request
+    **Request**
     
     ```http request
     GET /interactive/notification/index
     ```
     
-    Response
+    **Response**
 
 2. Teacher create new notification
     
-    Request
+    **Request**
     
     ```http request
     POST /interactive/notification/index
     ```
     
-    Parameters
+    **Parameters**
     
-    Response
+    **Response**
     
 3. Teacher change the detail of failed notification
 
-    Request
+    **Request**
     
     ```http request
     PATCH /interactive/notification/index/{uuid}
     ```
     
-    Parameters
+    **Parameters**
     
-    Response
+    **Response**
 
 ### Data Visualization
 
 1. Get the visualization data of student region distribution
 
-    Request
+    **Request**
     
     ```http request
     GET /visualization/region/index
     ```
     
-    Response
+    **Response**
     
 2. Get the visualization data of statistics
 
-    Request
+    **Request**
     
     ```http request
     GET /visualization/statistics/index
     ```
     
-    Response
+    **Response**
     
 3. Get the visualization data of line charts
 
-    Request
+    **Request**
     
     ```http request
     GET /visualization/chart/index
     ```
     
-    Response
+    **Response**
     
 4. Get the visualization data of division distribution
 
-    Request
+    **Request**
     
     ```http request
     GET /visualization/division/index
     ```
     
-    Response
+    **Response**
     
 5. Get the visualization data of communication situation
 
-    Request
+    **Request**
     
     ```http request
     GET /visualization/communication/index
     ``` 
     
-    Response
+    **Response**

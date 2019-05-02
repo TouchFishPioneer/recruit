@@ -24,7 +24,7 @@ public class TeacherRegistrationServiceImpl implements TeacherRegistrationServic
 
         if (teacherAccount == null)
             return false;
-        else if (teacherAccount.getTeacherStatus().equals(AccountStatusEnum.DISABLED.getAccountStatusCode()))
+        else if (teacherAccount.getTeacherStatus().equals(AccountStatusEnum.DISABLED.getCode()))
             return false;
         else return teacherAccount.getTeacherPassword().equals(teacherPassword);
     }
@@ -46,5 +46,21 @@ public class TeacherRegistrationServiceImpl implements TeacherRegistrationServic
             throw new RecruitException(ExceptionStatusEnum.TEACHER_NOT_EXIST);
 
         return teacherAccountRepository.save(teacherAccount);
+    }
+
+    @Override
+    public TeacherAccount findTeacherAccountByUsername(String teacherUsername) {
+        TeacherAccount teacherAccount = teacherAccountRepository.findByTeacherUsername(teacherUsername);
+        if (teacherAccount == null)
+            throw new RecruitException(ExceptionStatusEnum.TEACHER_NOT_EXIST);
+        return teacherAccount;
+    }
+
+    @Override
+    public TeacherAccount findTeacherAccountByUuid(String teacherUuid) {
+        TeacherAccount teacherAccount = teacherAccountRepository.findByTeacherUuid(teacherUuid);
+        if (teacherAccount == null)
+            throw new RecruitException(ExceptionStatusEnum.TEACHER_NOT_EXIST);
+        return teacherAccount;
     }
 }

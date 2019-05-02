@@ -15,6 +15,8 @@ public class TeacherAccount {
     private Integer teacherAccountId;
     private String teacherUsername;
     private String teacherPassword;
+    private String teacherNickname;
+    private Integer teacherRole;
     private Integer teacherStatus;
     private String teacherRegion;
     private String teacherAvatar;

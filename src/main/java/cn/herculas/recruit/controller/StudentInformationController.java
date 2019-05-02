@@ -2,7 +2,6 @@ package cn.herculas.recruit.controller;
 
 import cn.herculas.recruit.data.DO.StudentDetail;
 import cn.herculas.recruit.data.VO.ResultVO;
-import cn.herculas.recruit.enumeration.ExceptionStatusEnum;
 import cn.herculas.recruit.exception.RecruitException;
 import cn.herculas.recruit.form.StudentDetailForm;
 import cn.herculas.recruit.service.StudentInformationService;

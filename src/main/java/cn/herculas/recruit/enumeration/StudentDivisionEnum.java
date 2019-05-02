@@ -9,11 +9,11 @@ public enum StudentDivisionEnum {
     ARTS(2, "arts"),
     SPORTS(3, "sports and physical");
 
-    private Integer studentDivisionCode;
-    private String divisionDescription;
+    private Integer code;
+    private String description;
 
-    StudentDivisionEnum(Integer studentDivisionCode, String divisionDescription) {
-        this.studentDivisionCode = studentDivisionCode;
-        this.divisionDescription = divisionDescription;
+    StudentDivisionEnum(Integer code, String description) {
+        this.code = code;
+        this.description = description;
     }
 }

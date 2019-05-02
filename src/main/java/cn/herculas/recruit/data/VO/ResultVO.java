@@ -1,9 +1,11 @@
 package cn.herculas.recruit.data.VO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultVO<T> {
     private Integer code;
     private String message;
@@ -21,7 +23,7 @@ public class ResultVO<T> {
         return ResultVO.success(null);
     }
 
-    public static ResultVO error(Integer code, String message) {
+    private static ResultVO error(Integer code, String message) {
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(code);
         resultVO.setMessage(message);

@@ -8,11 +8,11 @@ public enum StudentInfoSourceEnum {
     REGISTER(1, "data from student self-registration"),
     IMPORT_AND_REGISTER(2, "student data have been confirmed");
 
-    private Integer studentInfoSourceCode;
-    private String sourceDescription;
+    private Integer code;
+    private String description;
 
-    StudentInfoSourceEnum(Integer studentInfoSourceCode, String sourceDescription) {
-        this.studentInfoSourceCode = studentInfoSourceCode;
-        this.sourceDescription = sourceDescription;
+    StudentInfoSourceEnum(Integer code, String description) {
+        this.code = code;
+        this.description = description;
     }
 }
