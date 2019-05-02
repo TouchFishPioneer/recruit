@@ -152,7 +152,7 @@
     name: "李轩"
     uuid: "53e27903a13b4eabb4fd69f8455a60e3"
     ```
-    > Tip: you do not need to pass all the fields of one student but only pass the field(s) which you want to update.
+    > Tip: you do not need to pass all the fields of one student but only the field(s) which you want to update.
     
     **Response**
     
@@ -326,7 +326,7 @@
     remarks: 研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。
     uuid: e4181666db2e4499a9f18aaab49b7fd5
     ```
-    > Tip: Just like the student side, you do not need to pass all the fields of one teacher but only pass the field(s) which you want to update.
+    > Tip: Just like the student side, you do not need to pass all the fields of one teacher but only the field(s) which you want to update.
 
     **Response**
     
@@ -353,9 +353,42 @@
 
 1. Student login and get the token
 
-2. Get detail student account information
+    **Request**
+    
+    ```http request
+    POST /log/student/in
+    ```
+    
+    **Response**
+    
+    
+    
+2. Get student account information
+
+    **Request**
+    
+    ```http request
+    GET /log/student/info
+    ```
+    
+    **Response**
 
 3. Student logout
+
+    **Request**
+    
+    ```http request
+    POST /log/student/out
+    ```
+    
+    **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success"
+    }
+    ```
 
 ### Teacher Login and Logout
 
@@ -420,7 +453,7 @@
     }
     ```
     
-4. Get detail teacher account information
+4. Get teacher account information
     
     **Request**
     
@@ -433,6 +466,7 @@
     ```http request
     cookie: token=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJyZWNydWl0Iiwic3ViIjoiYm9ib2FsaXMiLCJpYXQiOjE1NTY3ODYzNzcsImV4cCI6MTU1NjgyOTU3N30.AeUFZV7wbpRCvc270W9zAWcsONrf8qjtGJMUttykQrI
     ```
+    
     > The parameter of this interface should be in the cookies.
     
     **Response**
@@ -473,14 +507,140 @@
 ### Student Account Management
 
 1. Create a new student account
+    
+    **Request**
+    
+    ```http request
+    POST /account/student/index
+    ```
+    
+    **Parameters**
+    
+    ```http request
+    email: wurahara@163.com
+    password: 20090520
+    nickname: tantailan
+    ```
+    
+    **Response**
+    
+    ```json
+    {
+         "code": 200,
+         "message": "success",
+         "data": {
+             "email": "wurahara@163.com",
+             "nickname": "tantailan",
+             "status": 1,
+             "uuid": "08af02a583424620966b24156a58ea9f"
+         }
+    }
+    ```
 
 2. Update the account of a specific student
+
+    **Request**
+    
+    ```http request
+    PATCH /account/student/index
+    ```
+    
+    **Parameters**
+    
+    ```http request
+    nickname: killerquin
+    uuid: 6c8f9c693bfd47aaa1f0a5ad2258e6ce
+    ```
+    
+    > Tip: You do not need to pass all the fields of one account but only the field(s) which you want to update.
+        
+    **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success",
+        "data": {
+            "email": "wurahara@163.com",
+            "nickname": "killerquin",
+            "status": 1,
+            "uuid": "08af02a583424620966b24156a58ea9f"
+        }
+    }
+    ```
 
 ### Teacher Account Management
 
 1. Create a new teacher account
 
+    **Request**
+    
+    ```http request
+    POST /account/teacher/index
+    ```
+    
+    **Parameters**
+    
+    ```http request
+    username: songyubo
+    password: 18765432
+    nickname: 追风大叔
+    role: 2
+    region: 320100
+    avatar: 1
+    ```
+    
+    **Response**
+    
+    ```json
+    {
+         "code": 200,
+         "message": "success",
+         "data": {
+             "username": "songyubo",
+             "nickname": "追风大叔",
+             "role": 2,
+             "status": 1,
+             "region": "320100",
+             "avatar": "1",
+             "uuid": "7aa4b10e277f4d4c820571b848b7e60d"
+         }
+    }
+    ```
+
 2. Update the account of a specific teacher
+    
+    **Request**
+    
+    ```http request
+    PATCH /account/teacher/index
+    ```
+    
+    **Parameters**
+    
+    ```http request
+    nickname: 追风的油腻中年男
+    avatar: 12
+    uuid:7aa4b10e277f4d4c820571b848b7e60d
+    ```
+    
+    **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success",
+        "data": {
+            "username": "songyubo",
+            "nickname": "追风的油腻中年男",
+            "role": 2,
+            "status": 1,
+            "region": "320100",
+            "avatar": "12",
+            "uuid": "7aa4b10e277f4d4c820571b848b7e60d"
+        }
+    }
+    ```
 
 ### Question and Answer
 

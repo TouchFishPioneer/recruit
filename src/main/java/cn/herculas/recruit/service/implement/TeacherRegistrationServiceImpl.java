@@ -37,6 +37,9 @@ public class TeacherRegistrationServiceImpl implements TeacherRegistrationServic
         if (teacherAccount.getTeacherUuid() == null)
             teacherAccount.setTeacherUuid(KeyGenerator.uuidGenerator());
 
+        if (teacherAccount.getTeacherStatus() == null)
+            teacherAccount.setTeacherStatus(AccountStatusEnum.VALID.getCode());
+
         return teacherAccountRepository.save(teacherAccount);
     }
 
