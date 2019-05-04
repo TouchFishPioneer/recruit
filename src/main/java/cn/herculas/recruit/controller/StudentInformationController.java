@@ -2,11 +2,11 @@ package cn.herculas.recruit.controller;
 
 import cn.herculas.recruit.data.DO.StudentDetail;
 import cn.herculas.recruit.data.VO.ResultVO;
+import cn.herculas.recruit.data.VO.StudentDetailVO;
 import cn.herculas.recruit.exception.RecruitException;
 import cn.herculas.recruit.form.StudentDetailForm;
 import cn.herculas.recruit.service.StudentInformationService;
 import cn.herculas.recruit.util.parser.StudentDetailParser;
-import cn.herculas.recruit.util.replicator.PropertyReplicator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/info/student")
@@ -32,7 +34,11 @@ public class StudentInformationController {
         // TODO: Permission Check
 
         Page<StudentDetail> studentDetailPage = studentInformationService.listStudentDetail(PageRequest.of(page, size));
-        return ResultVO.success(studentDetailPage.getContent());
+        List<StudentDetailVO> studentDetailVOList = new ArrayList<>();
+        for (StudentDetail studentDetail : studentDetailPage) {
+            studentDetailVOList.add(StudentDetailParser.viewParser(studentDetail));
+        }
+        return ResultVO.success(studentDetailVOList);
     }
 
     @GetMapping("/index/{uuid}")
@@ -41,8 +47,8 @@ public class StudentInformationController {
         // TODO: Permission Check
 
         try {
-            StudentDetail studentDetail = studentInformationService.findStudentDetail(studentUuid);
-            return ResultVO.success(studentDetail);
+            StudentDetail result = studentInformationService.findStudentDetail(studentUuid);
+            return ResultVO.success(StudentDetailParser.viewParser(result));
         } catch (RecruitException e) {
             return ResultVO.error(HttpStatus.NOT_FOUND);
         }
@@ -60,7 +66,7 @@ public class StudentInformationController {
 
         try {
             StudentDetail result = studentInformationService.createStudentDetail(studentDetail);
-            return ResultVO.success(result);
+            return ResultVO.success(StudentDetailParser.viewParser(result));
         } catch (RecruitException e) {
             return ResultVO.error(HttpStatus.FORBIDDEN);
         }
@@ -74,20 +80,11 @@ public class StudentInformationController {
         if (bindingResult.hasErrors())
             return ResultVO.error(HttpStatus.BAD_REQUEST);
 
-        StudentDetail studentDetail;
-
-        try {
-            studentDetail = studentInformationService.findStudentDetail(studentDetailForm.getUuid());
-        } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.NOT_FOUND);
-        }
-
-        StudentDetail studentDetailParams = StudentDetailParser.formParser(studentDetailForm);
-        PropertyReplicator.copyPropertiesIgnoreNull(studentDetailParams, studentDetail);
+        StudentDetail studentDetail = StudentDetailParser.formParser(studentDetailForm);
 
         try {
             StudentDetail result = studentInformationService.updateStudentDetail(studentDetail);
-            return ResultVO.success(result);
+            return ResultVO.success(StudentDetailParser.viewParser(result));
         } catch (RecruitException e) {
             return ResultVO.error(HttpStatus.FORBIDDEN);
         }

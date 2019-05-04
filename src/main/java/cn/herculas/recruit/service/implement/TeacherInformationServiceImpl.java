@@ -6,6 +6,7 @@ import cn.herculas.recruit.exception.RecruitException;
 import cn.herculas.recruit.repository.TeacherDetailRepository;
 import cn.herculas.recruit.service.TeacherInformationService;
 import cn.herculas.recruit.util.generator.KeyGenerator;
+import cn.herculas.recruit.util.replicator.PropertyReplicator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,11 @@ public class TeacherInformationServiceImpl implements TeacherInformationService 
 
     @Override
     public TeacherDetail updateTeacherDetail(TeacherDetail teacherDetail) {
-        if (teacherDetailRepository.findByTeacherUuid(teacherDetail.getTeacherUuid()) == null)
+        TeacherDetail oldTeacherDetail = teacherDetailRepository.findByTeacherUuid(teacherDetail.getTeacherUuid());
+        if (oldTeacherDetail == null)
             throw new RecruitException(ExceptionStatusEnum.TEACHER_NOT_EXIST);
-
-        return teacherDetailRepository.save(teacherDetail);
+        PropertyReplicator.copyPropertiesIgnoreNull(teacherDetail, oldTeacherDetail);
+        return teacherDetailRepository.save(oldTeacherDetail);
     }
 
     @Override

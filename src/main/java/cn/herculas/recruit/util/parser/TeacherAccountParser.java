@@ -15,6 +15,7 @@ public class TeacherAccountParser {
         teacherAccount.setTeacherStatus(teacherAccountForm.getStatus());
         teacherAccount.setTeacherRegion(teacherAccountForm.getRegion());
         teacherAccount.setTeacherAvatar(teacherAccountForm.getAvatar());
+        teacherAccount.setTeacherUuid(teacherAccountForm.getUuid());
 
         return teacherAccount;
     }

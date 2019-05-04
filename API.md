@@ -18,25 +18,64 @@
        "message": "success",
        "data": [
            {
-               "studentId": 1,
-               "studentName": "李车干",
-               "studentGender": 1,
-               "studentTel": "15651969275",
-               "studentBirthday": "1995-04-25T05:00:00.000+0000",
-               "studentIdentityNumber": "321323199411202851",
-               "studentAdmissionNumber": "62125147856982345345",
-               "studentRegion": "621322",
-               "studentSchool": "河北省正定中学",
-               "studentMark": 615,
-               "studentDivision": 1,
-               "studentRank": 2000,
-               "studentRemarks": "给我整个最好的",
-               "studentInfoSource": 1,
-               "studentContactStatus": 3,
-               "studentIntentionalMajor": "{3}",
-               "studentUnintentionalMajor": "{2}",
-               "studentGrade": 3,
-               "studentUuid": "53e27903a13b4eabb4fd69f8455a60e3"
+               "name": "宋睿",
+               "gender": 1,
+               "tel": "18795887803",
+               "birthday": "1994-11-19T06:00:00.000+0000",
+               "identity_number": "321323199411202852",
+               "admission_number": "123486486158648794648",
+               "region": "321323",
+               "school": "江苏省泗阳中学",
+               "mark": 378,
+               "division": 1,
+               "rank": 2000,
+               "remarks": "除了机械学院，可能还配能环",
+               "info_source": 1,
+               "contact_status": 0,
+               "intentional_major": "2",
+               "unintentional_major": "",
+               "grade": 3,
+               "uuid": "08af02a583424620966b24156a58ea9f"
+           },
+           {
+               "name": "李轩",
+               "gender": 1,
+               "tel": "18452579588",
+               "birthday": "1995-04-25T05:00:00.000+0000",
+               "identity_number": "140502199504262574",
+               "admission_number": "140524523664578825657",
+               "region": "140502",
+               "school": "河北省正定中学",
+               "mark": 675,
+               "division": 1,
+               "rank": 1500,
+               "remarks": "给我整个最好的",
+               "info_source": 0,
+               "contact_status": 0,
+               "intentional_major": "3",
+               "unintentional_major": "2",
+               "grade": 3,
+               "uuid": "446b96a42b9a4745b522c2b69a3163c1"
+           },
+           {
+               "name": "石伟",
+               "gender": 1,
+               "tel": "14758745214",
+               "birthday": "1995-10-14T05:00:00.000+0000",
+               "identity_number": "320805199510150257",
+               "admission_number": "320815156548468486684",
+               "region": "320805",
+               "school": "江苏省如皋中学",
+               "mark": 385,
+               "division": 1,
+               "rank": 1200,
+               "remarks": "也给我整个最好的",
+               "info_source": 0,
+               "contact_status": 0,
+               "intentional_major": "4",
+               "unintentional_major": "2",
+               "grade": 3,
+               "uuid": "cb52749664ad4d60925a4c01e4f052fa"
            }
        ]
    }
@@ -57,25 +96,24 @@
         "code": 200,
         "message": "success",
         "data": {
-            "studentId": 2,
-            "studentName": "石伟",
-            "studentGender": 1,
-            "studentTel": "13057653392",
-            "studentBirthday": "1995-10-14T05:00:00.000+0000",
-            "studentIdentityNumber": "320805199510151257",
-            "studentAdmissionNumber": "1341561565646498158478",
-            "studentRegion": "320805",
-            "studentSchool": "江苏省如皋中学",
-            "studentMark": 385,
-            "studentDivision": 1,
-            "studentRank": 1500,
-            "studentRemarks": "给我整个最好的",
-            "studentInfoSource": null,
-            "studentContactStatus": null,
-            "studentIntentionalMajor": "{4}",
-            "studentUnintentionalMajor": "{2}",
-            "studentGrade": 3,
-            "studentUuid": "5c46c0b035c14583a52dbc8d88d30bba"
+            "name": "宋睿",
+            "gender": 1,
+            "tel": "18795887803",
+            "birthday": "1994-11-19T06:00:00.000+0000",
+            "identity_number": "321323199411202852",
+            "admission_number": "123486486158648794648",
+            "region": "321323",
+            "school": "江苏省泗阳中学",
+            "mark": 378,
+            "division": 1,
+            "rank": 2000,
+            "remarks": "只配机械学院",
+            "info_source": 1,
+            "contact_status": 0,
+            "intentional_major": "2",
+            "unintentional_major": "",
+            "grade": 3,
+            "uuid": "08af02a583424620966b24156a58ea9f"
         }
     }
     ```
@@ -91,23 +129,25 @@
     **Parameters**
     
     ```http request
-    name: 石伟
+    name: 宋睿
     gender: 1
-    tel: 13057653392
-    birthday: 1995-10-15
-    identity_number: 320805199510151257
-    admission_number: 1341561565646498158478
-    region: 320805
-    school: 江苏省如皋中学
-    mark: 385
+    tel: 18795887803
+    birthday: 1994-11-20
+    identity_number: 321323199411202852
+    admission_number: 123486486158648794648
+    region: 321323
+    school: 江苏省泗阳中学
+    mark: 378
     division: 1
-    rank: 1500
-    remarks: 给我整个最好的
-    intentional_major: {4}
-    unintentional_major: {2}
+    rank: 2000
+    remarks: 只配机械学院
+    intentional_major: 2
+    unintentional_major:
     grade: 3
+    uuid: 08af02a583424620966b24156a58ea9f
     ```
-    
+    > If the parameters from front end contain 'uuid' field, it means that this student has already signed in this system, and the given 'uuid' should be consistent with the 'studentUuid' field in student account table.
+
     **Response**
     
     ```json
@@ -115,25 +155,24 @@
         "code": 200,
         "message": "success",
         "data": {
-            "studentId": 3,
-            "studentName": "石伟",
-            "studentGender": 1,
-            "studentTel": "13057653392",
-            "studentBirthday": "1995-10-14T16:00:00.000+0000",
-            "studentIdentityNumber": "320805199510151257",
-            "studentAdmissionNumber": "1341561565646498158478",
-            "studentRegion": "320805",
-            "studentSchool": "江苏省如皋中学",
-            "studentMark": 385,
-            "studentDivision": 1,
-            "studentRank": 1500,
-            "studentRemarks": "给我整个最好的",
-            "studentInfoSource": null,
-            "studentContactStatus": null,
-            "studentIntentionalMajor": "{4}",
-            "studentUnintentionalMajor": "{2}",
-            "studentGrade": 3,
-            "studentUuid": "5c46c0b035c14583a52dbc8d88d30bba"
+            "name": "宋睿",
+            "gender": 1,
+            "tel": "18795887803",
+            "birthday": "1994-11-19T16:00:00.000+0000",
+            "identity_number": "321323199411202852",
+            "admission_number": "123486486158648794648",
+            "region": "321323",
+            "school": "江苏省泗阳中学",
+            "mark": 378,
+            "division": 1,
+            "rank": 2000,
+            "remarks": "只配机械学院",
+            "info_source": 1,
+            "contact_status": 0,
+            "intentional_major": "2",
+            "unintentional_major": "",
+            "grade": 3,
+            "uuid": "08af02a583424620966b24156a58ea9f"
         }
     }
     ```
@@ -149,8 +188,8 @@
     **Parameters**
     
     ```http request
-    name: "李轩"
-    uuid: "53e27903a13b4eabb4fd69f8455a60e3"
+    remarks: 除了机械学院，可能还配能环
+    uuid: 08af02a583424620966b24156a58ea9f
     ```
     > Tip: you do not need to pass all the fields of one student but only the field(s) which you want to update.
     
@@ -161,25 +200,24 @@
         "code": 200,
         "message": "success",
         "data": {
-            "studentId": 1,
-            "studentName": "李轩",
-            "studentGender": 1,
-            "studentTel": "15651969275",
-            "studentBirthday": "1995-04-25T05:00:00.000+0000",
-            "studentIdentityNumber": "321323199411202851",
-            "studentAdmissionNumber": "62125147856982345345",
-            "studentRegion": "621322",
-            "studentSchool": "河北省正定中学",
-            "studentMark": 615,
-            "studentDivision": 1,
-            "studentRank": 2000,
-            "studentRemarks": "给我整个最好的",
-            "studentInfoSource": 1,
-            "studentContactStatus": 3,
-            "studentIntentionalMajor": "{3}",
-            "studentUnintentionalMajor": "{2}",
-            "studentGrade": 3,
-            "studentUuid": "53e27903a13b4eabb4fd69f8455a60e3"
+            "name": "宋睿",
+            "gender": 1,
+            "tel": "18795887803",
+            "birthday": "1994-11-19T06:00:00.000+0000",
+            "identity_number": "321323199411202852",
+            "admission_number": "123486486158648794648",
+            "region": "321323",
+            "school": "江苏省泗阳中学",
+            "mark": 378,
+            "division": 1,
+            "rank": 2000,
+            "remarks": "除了机械学院，可能还配能环",
+            "info_source": 1,
+            "contact_status": 0,
+            "intentional_major": "2",
+            "unintentional_major": "",
+            "grade": 3,
+            "uuid": "08af02a583424620966b24156a58ea9f"
         }
     }
     ```
@@ -202,40 +240,37 @@
         "message": "success",
         "data": [
             {
-                "teacherId": 1,
-                "teacherName": "宋宇波",
-                "teacherCardNumber": "130055213",
-                "teacherGender": 1,
-                "teacherTel": "13851884333",
-                "teacherDepartment": "57",
-                "teacherDuty": "副教授",
-                "teacherGraduatedSchool": "东南大学",
-                "teacherRemarks": "研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。",
-                "teacherUuid": "e4181666db2e4499a9f18aaab49b7fd5"
+                "name": "宋宇波",
+                "card_number": "130055213",
+                "gender": 1,
+                "tel": "025-12345678",
+                "department": "57",
+                "duty": "副教授",
+                "graduated_school": "东南大学",
+                "remarks": "研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。",
+                "uuid": "7aa4b10e277f4d4c820571b848b7e60d"
             },
             {
-                "teacherId": 2,
-                "teacherName": "彭林宁",
-                "teacherCardNumber": "130081245",
-                "teacherGender": 1,
-                "teacherTel": "025-52091692",
-                "teacherDepartment": "57",
-                "teacherDuty": "副研究员",
-                "teacherGraduatedSchool": "法国雷恩国立应用科学学院",
-                "teacherRemarks": "研究领域：通信系统物理层安全，射频指纹识别，无线信道密钥生成，室内定位，软件无线电。",
-                "teacherUuid": "6c36e068a3e546f58a1a0f45205dfd34"
+                "name": "彭林宁",
+                "card_number": "130081245",
+                "gender": 1,
+                "tel": "025-52091692",
+                "department": "57",
+                "duty": "副研究员",
+                "graduated_school": "法国雷恩国立应用科学学院",
+                "remarks": "研究领域：通信系统物理层安全，射频指纹识别，无线信道密钥生成，室内定位，软件无线电。",
+                "uuid": "b5133f642e044ca5842680848adcf41a"
             },
             {
-                "teacherId": 3,
-                "teacherName": "胡爱群",
-                "teacherCardNumber": "130905417",
-                "teacherGender": 1,
-                "teacherTel": "025-83795112",
-                "teacherDepartment": "57",
-                "teacherDuty": "教授",
-                "teacherGraduatedSchool": "东南大学",
-                "teacherRemarks": "研究领域：无线网络安全、物理层安全技术。",
-                "teacherUuid": "3beeccd51c484d8ab154139a48316301"
+                "name": "胡爱群",
+                "card_number": "130905417",
+                "gender": 1,
+                "tel": "025-83795112",
+                "department": "57",
+                "duty": "教授",
+                "graduated_school": "东南大学",
+                "remarks": "研究领域：无线网络安全、物理层安全技术。",
+                "uuid": "af1256aa57c14a8183a0767135cbb2fe"
             }
         ]
     }
@@ -256,16 +291,15 @@
         "code": 200,
         "message": "success",
         "data": {
-            "teacherId": 2,
-            "teacherName": "彭林宁",
-            "teacherCardNumber": "130081245",
-            "teacherGender": 1,
-            "teacherTel": "025-52091692",
-            "teacherDepartment": "57",
-            "teacherDuty": "副研究员",
-            "teacherGraduatedSchool": "法国雷恩国立应用科学学院",
-            "teacherRemarks": "研究领域：通信系统物理层安全，射频指纹识别，无线信道密钥生成，室内定位，软件无线电。",
-            "teacherUuid": "6c36e068a3e546f58a1a0f45205dfd34"
+            "name": "宋宇波",
+            "card_number": "130055213",
+            "gender": 1,
+            "tel": "025-12345678",
+            "department": "57",
+            "duty": "副教授",
+            "graduated_school": "东南大学",
+            "remarks": "研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。",
+            "uuid": "7aa4b10e277f4d4c820571b848b7e60d"
         }
     }
     ```
@@ -281,15 +315,18 @@
     **Parameters**
     
     ```http request
-    name: 胡爱群
-    card_number: 130905417
+    name: 宋宇波
+    card_number: 130055213
     gender: 1
-    tel: 025-83795112
+    tel: 13851884333
     department: 57
-    duty: 教授
+    duty: 副教授
     graduated_school: 东南大学
-    remarks: 研究领域：无线网络安全、物理层安全技术。
+    remarks: 研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。
+    uuid: 7aa4b10e277f4d4c820571b848b7e60d
     ```
+    
+    > If the parameters from front end contain 'uuid' field, it means that this teacher has already signed in this system, and the given 'uuid' should be consistent with the 'teacherUuid' field in teacher account table.
     
     **Response**
     
@@ -298,16 +335,15 @@
         "code": 200,
         "message": "success",
         "data": {
-            "teacherId": 3,
-            "teacherName": "胡爱群",
-            "teacherCardNumber": "130905417",
-            "teacherGender": true,
-            "teacherTel": "025-83795112",
-            "teacherDepartment": "57",
-            "teacherDuty": "教授",
-            "teacherGraduatedSchool": "东南大学",
-            "teacherRemarks": "研究领域：无线网络安全、物理层安全技术。",
-            "teacherUuid": "3beeccd51c484d8ab154139a48316301"
+            "name": "宋宇波",
+            "card_number": "130055213",
+            "gender": 1,
+            "tel": "13851884333",
+            "department": "57",
+            "duty": "副教授",
+            "graduated_school": "东南大学",
+            "remarks": "研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。",
+            "uuid": "7aa4b10e277f4d4c820571b848b7e60d"
         }
     }
     ```
@@ -323,11 +359,11 @@
     **Parameters**
     
     ```http request
-    remarks: 研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。
-    uuid: e4181666db2e4499a9f18aaab49b7fd5
+    tel: 025-12345678
+    uuid: 7aa4b10e277f4d4c820571b848b7e60d
     ```
     > Tip: Just like the student side, you do not need to pass all the fields of one teacher but only the field(s) which you want to update.
-
+    
     **Response**
     
     ```json
@@ -335,16 +371,15 @@
         "code": 200,
         "message": "success",
         "data": {
-            "teacherId": 1,
-            "teacherName": "宋宇波",
-            "teacherCardNumber": "130055213",
-            "teacherGender": true,
-            "teacherTel": "13851884333",
-            "teacherDepartment": "57",
-            "teacherDuty": "副教授",
-            "teacherGraduatedSchool": "东南大学",
-            "teacherRemarks": "研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。",
-            "teacherUuid": "e4181666db2e4499a9f18aaab49b7fd5"
+            "name": "宋宇波",
+            "card_number": "130055213",
+            "gender": 1,
+            "tel": "025-12345678",
+            "department": "57",
+            "duty": "副教授",
+            "graduated_school": "东南大学",
+            "remarks": "研究领域：无线网络和移动通信安全，移动终端安全，隐私数据安全等。",
+            "uuid": "7aa4b10e277f4d4c820571b848b7e60d"
         }
     }
     ```
@@ -553,7 +588,9 @@
     ```
     
     > Tip: You do not need to pass all the fields of one account but only the field(s) which you want to update.
-        
+    
+    > Caution: You should not modify the 'password' field by this interface. The modification of 'password' should be performed by its specific API below.
+    
     **Response**
     
     ```json
@@ -566,6 +603,31 @@
             "status": 1,
             "uuid": "08af02a583424620966b24156a58ea9f"
         }
+    }
+    ```
+
+3. Update the password of specific student
+
+    **Request**
+    
+    ```http request
+    PATCH /account/student/password
+    ```
+    
+    **Parameters**
+    
+    ```http request
+    old_password: 123456789
+    password: 20090520
+    uuid: 08af02a583424620966b24156a58ea9f
+    ```
+    
+    **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success"
     }
     ```
 
@@ -639,6 +701,31 @@
             "avatar": "12",
             "uuid": "7aa4b10e277f4d4c820571b848b7e60d"
         }
+    }
+    ```
+
+3. Update the password of specific teacher
+
+    **Request**
+    
+    ```http request
+    PATCH /account/teacher/password
+    ```
+    
+    **Parameters**
+    
+    ```http request
+    old_password: 18765432
+    password: 12345678
+    uuid: 7aa4b10e277f4d4c820571b848b7e60d
+    ```
+
+    **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success"
     }
     ```
 

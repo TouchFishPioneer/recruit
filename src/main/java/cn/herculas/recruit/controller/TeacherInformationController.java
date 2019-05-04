@@ -2,7 +2,7 @@ package cn.herculas.recruit.controller;
 
 import cn.herculas.recruit.data.DO.TeacherDetail;
 import cn.herculas.recruit.data.VO.ResultVO;
-import cn.herculas.recruit.enumeration.ExceptionStatusEnum;
+import cn.herculas.recruit.data.VO.TeacherDetailVO;
 import cn.herculas.recruit.exception.RecruitException;
 import cn.herculas.recruit.form.TeacherDetailForm;
 import cn.herculas.recruit.service.TeacherInformationService;
@@ -15,6 +15,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/info/teacher")
@@ -33,7 +35,11 @@ public class TeacherInformationController {
         // TODO: Permission Check
 
         Page<TeacherDetail> teacherDetailPage = teacherInformationService.listTeacherDetail(PageRequest.of(page, size));
-        return ResultVO.success(teacherDetailPage.getContent());
+        List<TeacherDetailVO> teacherDetailVOList = new ArrayList<>();
+        for (TeacherDetail teacherDetail : teacherDetailPage.getContent()) {
+            teacherDetailVOList.add(TeacherDetailParser.viewParser(teacherDetail));
+        }
+        return ResultVO.success(teacherDetailVOList);
     }
 
     @GetMapping("/index/{uuid}")
@@ -43,7 +49,7 @@ public class TeacherInformationController {
 
         try {
             TeacherDetail teacherDetail = teacherInformationService.findTeacherDetail(teacherUuid);
-            return ResultVO.success(teacherDetail);
+            return ResultVO.success(TeacherDetailParser.viewParser(teacherDetail));
         } catch (RecruitException e) {
             return ResultVO.error(HttpStatus.NOT_FOUND);
         }
@@ -61,7 +67,7 @@ public class TeacherInformationController {
 
         try {
             TeacherDetail result = teacherInformationService.createTeacherDetail(teacherDetail);
-            return ResultVO.success(result);
+            return ResultVO.success(TeacherDetailParser.viewParser(result));
         } catch (RecruitException e) {
             return ResultVO.error(HttpStatus.FORBIDDEN);
         }
@@ -75,20 +81,11 @@ public class TeacherInformationController {
         if (bindingResult.hasErrors())
             return ResultVO.error(HttpStatus.BAD_REQUEST);
 
-        TeacherDetail teacherDetail;
-
-        try {
-            teacherDetail = teacherInformationService.findTeacherDetail(teacherDetailForm.getUuid());
-        } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.NOT_FOUND);
-        }
-
-        TeacherDetail teacherDetailParams = TeacherDetailParser.formParser(teacherDetailForm);
-        PropertyReplicator.copyPropertiesIgnoreNull(teacherDetailParams, teacherDetail);
+        TeacherDetail teacherDetail = TeacherDetailParser.formParser(teacherDetailForm);
 
         try {
             TeacherDetail result = teacherInformationService.updateTeacherDetail(teacherDetail);
-            return ResultVO.success(result);
+            return ResultVO.success(TeacherDetailParser.viewParser(result));
         } catch (RecruitException e) {
             return ResultVO.error(HttpStatus.FORBIDDEN);
         }

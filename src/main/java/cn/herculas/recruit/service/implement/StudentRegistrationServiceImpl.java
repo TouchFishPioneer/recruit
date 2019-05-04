@@ -7,6 +7,7 @@ import cn.herculas.recruit.exception.RecruitException;
 import cn.herculas.recruit.repository.StudentAccountRepository;
 import cn.herculas.recruit.service.StudentRegistrationService;
 import cn.herculas.recruit.util.generator.KeyGenerator;
+import cn.herculas.recruit.util.replicator.PropertyReplicator;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,10 +35,11 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 
     @Override
     public StudentAccount updateStudentAccount(StudentAccount studentAccount) {
-        if (studentAccountRepository.findByStudentUuid(studentAccount.getStudentUuid()) == null)
+        StudentAccount oldStudentAccount = studentAccountRepository.findByStudentUuid(studentAccount.getStudentUuid());
+        if (oldStudentAccount == null)
             throw new RecruitException(ExceptionStatusEnum.STUDENT_NOT_EXIST);
-
-        return studentAccountRepository.save(studentAccount);
+        PropertyReplicator.copyPropertiesIgnoreNull(studentAccount, oldStudentAccount);
+        return studentAccountRepository.save(oldStudentAccount);
     }
 
     @Override

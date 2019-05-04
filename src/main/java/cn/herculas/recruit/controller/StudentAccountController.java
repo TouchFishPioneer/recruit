@@ -9,10 +9,7 @@ import cn.herculas.recruit.util.parser.StudentAccountParser;
 import cn.herculas.recruit.util.replicator.PropertyReplicator;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -52,20 +49,33 @@ public class StudentAccountController {
         if (bindingResult.hasErrors())
             return ResultVO.error(HttpStatus.BAD_REQUEST);
 
-        StudentAccount studentAccount;
-
-        try {
-            studentAccount = studentRegistrationService.findStudentAccountByUuid(studentAccountForm.getUuid());
-        } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.NOT_FOUND);
-        }
-
-        StudentAccount studentAccountParams = StudentAccountParser.formParser(studentAccountForm);
-        PropertyReplicator.copyPropertiesIgnoreNull(studentAccountParams, studentAccount);
+        StudentAccount studentAccount = StudentAccountParser.formParser(studentAccountForm);
+        if (studentAccount.getStudentPassword() != null)
+            return ResultVO.error(HttpStatus.FORBIDDEN);
 
         try {
             StudentAccount result = studentRegistrationService.updateStudentAccount(studentAccount);
             return ResultVO.success(StudentAccountParser.viewParser(result));
+        } catch (RecruitException e) {
+            return ResultVO.error(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @PatchMapping("/password")
+    public ResultVO updateStudentAccountPassword(@RequestParam("old_password") String oldPassword,
+                                                 @RequestParam("password") String newPassword,
+                                                 @RequestParam("uuid") String studentUuid) {
+
+        // TODO: Permission check
+
+        StudentAccount studentAccount = studentRegistrationService.findStudentAccountByUuid(studentUuid);
+        if (!studentAccount.getStudentPassword().equals(oldPassword))
+            return ResultVO.error(HttpStatus.FORBIDDEN);
+        studentAccount.setStudentPassword(newPassword);
+
+        try {
+            studentRegistrationService.updateStudentAccount(studentAccount);
+            return ResultVO.success();
         } catch (RecruitException e) {
             return ResultVO.error(HttpStatus.FORBIDDEN);
         }

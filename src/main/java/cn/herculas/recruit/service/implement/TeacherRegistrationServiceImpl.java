@@ -7,6 +7,7 @@ import cn.herculas.recruit.exception.RecruitException;
 import cn.herculas.recruit.repository.TeacherAccountRepository;
 import cn.herculas.recruit.service.TeacherRegistrationService;
 import cn.herculas.recruit.util.generator.KeyGenerator;
+import cn.herculas.recruit.util.replicator.PropertyReplicator;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -45,10 +46,11 @@ public class TeacherRegistrationServiceImpl implements TeacherRegistrationServic
 
     @Override
     public TeacherAccount updateTeacherAccount(TeacherAccount teacherAccount) {
-        if (teacherAccountRepository.findByTeacherUuid(teacherAccount.getTeacherUuid()) == null)
+        TeacherAccount oldTeacherAccount = teacherAccountRepository.findByTeacherUuid(teacherAccount.getTeacherUuid());
+        if (oldTeacherAccount == null)
             throw new RecruitException(ExceptionStatusEnum.TEACHER_NOT_EXIST);
-
-        return teacherAccountRepository.save(teacherAccount);
+        PropertyReplicator.copyPropertiesIgnoreNull(teacherAccount, oldTeacherAccount);
+        return teacherAccountRepository.save(oldTeacherAccount);
     }
 
     @Override

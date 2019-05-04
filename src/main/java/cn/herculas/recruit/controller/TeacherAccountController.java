@@ -2,18 +2,13 @@ package cn.herculas.recruit.controller;
 
 import cn.herculas.recruit.data.DO.TeacherAccount;
 import cn.herculas.recruit.data.VO.ResultVO;
-import cn.herculas.recruit.data.VO.TeacherAccountVO;
 import cn.herculas.recruit.exception.RecruitException;
 import cn.herculas.recruit.form.TeacherAccountForm;
 import cn.herculas.recruit.service.TeacherRegistrationService;
 import cn.herculas.recruit.util.parser.TeacherAccountParser;
-import cn.herculas.recruit.util.replicator.PropertyReplicator;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -53,19 +48,33 @@ public class TeacherAccountController {
         if (bindingResult.hasErrors())
             return ResultVO.error(HttpStatus.BAD_REQUEST);
 
-        TeacherAccount teacherAccount;
-        try {
-            teacherAccount = teacherRegistrationService.findTeacherAccountByUuid(teacherAccountForm.getUuid());
-        } catch (RecruitException e) {
-            return ResultVO.error(HttpStatus.NOT_FOUND);
-        }
-
-        TeacherAccount teacherAccountParams = TeacherAccountParser.formParser(teacherAccountForm);
-        PropertyReplicator.copyPropertiesIgnoreNull(teacherAccountParams, teacherAccount);
+        TeacherAccount teacherAccount = TeacherAccountParser.formParser(teacherAccountForm);
+        if (teacherAccount.getTeacherPassword() != null)
+            return ResultVO.error(HttpStatus.FORBIDDEN);
 
         try {
             TeacherAccount result = teacherRegistrationService.updateTeacherAccount(teacherAccount);
             return ResultVO.success(TeacherAccountParser.viewParser(result));
+        } catch (RecruitException e) {
+            return ResultVO.error(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @PatchMapping("/password")
+    public ResultVO updateTeacherAccountPassword(@RequestParam("old_password") String oldPassword,
+                                                 @RequestParam("password") String newPassword,
+                                                 @RequestParam("uuid") String teacherUuid) {
+
+        // TODO: Permission check
+
+        TeacherAccount teacherAccount = teacherRegistrationService.findTeacherAccountByUuid(teacherUuid);
+        if (!teacherAccount.getTeacherPassword().equals(oldPassword))
+            return ResultVO.error(HttpStatus.FORBIDDEN);
+        teacherAccount.setTeacherPassword(newPassword);
+
+        try {
+            teacherRegistrationService.updateTeacherAccount(teacherAccount);
+            return ResultVO.success();
         } catch (RecruitException e) {
             return ResultVO.error(HttpStatus.FORBIDDEN);
         }

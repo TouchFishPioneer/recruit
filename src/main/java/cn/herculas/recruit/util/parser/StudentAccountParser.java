@@ -12,6 +12,7 @@ public class StudentAccountParser {
         studentAccount.setStudentPassword(studentAccountForm.getPassword());
         studentAccount.setStudentNickname(studentAccountForm.getNickname());
         studentAccount.setStudentStatus(studentAccountForm.getStatus());
+        studentAccount.setStudentUuid(studentAccountForm.getUuid());
 
         return studentAccount;
     }
