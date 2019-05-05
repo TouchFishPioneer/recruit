@@ -396,8 +396,6 @@
     
     **Response**
     
-    
-    
 2. Get student account information
 
     **Request**
@@ -611,7 +609,7 @@
     **Request**
     
     ```http request
-    PATCH /account/student/password
+    PATCH /account/student/index/password
     ```
     
     **Parameters**
@@ -709,7 +707,7 @@
     **Request**
     
     ```http request
-    PATCH /account/teacher/password
+    PATCH /account/teacher/index/password
     ```
     
     **Parameters**
@@ -729,7 +727,7 @@
     }
     ```
 
-### Question and Answer
+### Q & A
 
 1. Get the list of questions
 
@@ -740,6 +738,41 @@
     ```
     
     **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success",
+        "data": [
+            {
+                "region": "001122",
+                "asker_uuid": "b9b59dc26d384f08a777d42fc1734708",
+                "theme": "母猪的产后护理",
+                "category": null,
+                "tag": null,
+                "status": 0,
+                "content": "你说你🐎呢",
+                "vote": 0,
+                "answer": null,
+                "answerer_uuid": null,
+                "uuid": "c4495f4937eb445bb48d0c78d0cb2398"
+            },
+            {
+                "region": "320100",
+                "asker_uuid": "08af02a583424620966b24156a58ea9f",
+                "theme": "母猪的产后护理",
+                "category": null,
+                "tag": null,
+                "status": 1,
+                "content": "想要咨询一下东南大学有母猪产后护理专业吗？在江苏省多少分能上啊？",
+                "vote": 1,
+                "answer": "没有，滚。",
+                "answerer_uuid": "7aa4b10e277f4d4c820571b848b7e60d",
+                "uuid": "befdb25be4934f1eb9613c2e5c1392cb"
+            }
+        ]
+    }
+    ```
 
 2. Student create a new question
 
@@ -751,7 +784,34 @@
     
     **Parameters**
     
+    ```http request
+    region: 320100
+    asker_uuid: 08af02a583424620966b24156a58ea9f
+    theme: 母猪的产后护理
+    content: 想要咨询一下东南大学有母猪产后护理专业吗？在江苏省多少分能上啊？
+    ```
+    
     **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success",
+        "data": {
+            "region": "320100",
+            "asker_uuid": "08af02a583424620966b24156a58ea9f",
+            "theme": "母猪的产后护理",
+            "category": null,
+            "tag": null,
+            "status": 0,
+            "content": "想要咨询一下东南大学有母猪产后护理专业吗？在江苏省多少分能上啊？",
+            "vote": 0,
+            "answer": null,
+            "answerer_uuid": null,
+            "uuid": "befdb25be4934f1eb9613c2e5c1392cb"
+        }
+    }
+    ```
     
 3. Teacher review and validate the question
  
@@ -760,8 +820,72 @@
     ```http request
     PATCH /interactive/question/index/review/{uuid}
     ```
-   
-4. Teacher answer a specific question
+    
+    **Parameters**
+    
+    ```http request
+    status: 1
+    ```
+    
+    **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success",
+        "data": {
+            "region": "320100",
+            "asker_uuid": "08af02a583424620966b24156a58ea9f",
+            "theme": "母猪的产后护理",
+            "category": null,
+            "tag": null,
+            "status": 1,
+            "content": "想要咨询一下东南大学有母猪产后护理专业吗？在江苏省多少分能上啊？",
+            "vote": 0,
+            "answer": null,
+            "answerer_uuid": null,
+            "uuid": "befdb25be4934f1eb9613c2e5c1392cb"
+        }
+    }
+    ```
+    
+4. Student vote for a specific question
+
+    **Request**
+    
+    ```http request
+    POST /interactive/question/index/vote/{uuid}
+    ```
+    
+    **Parameters**
+    
+    ```http request
+    student_uuid: 08af02a583424620966b24156a58ea9f
+    ```
+    
+    **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success",
+        "data": {
+            "region": "320100",
+            "asker_uuid": "08af02a583424620966b24156a58ea9f",
+            "theme": "母猪的产后护理",
+            "category": null,
+            "tag": null,
+            "status": 1,
+            "content": "想要咨询一下东南大学有母猪产后护理专业吗？在江苏省多少分能上啊？",
+            "vote": 1,
+            "answer": null,
+            "answerer_uuid": null,
+            "uuid": "befdb25be4934f1eb9613c2e5c1392cb"
+        }
+    }
+    ```
+
+5. Teacher answer a specific question
 
     **Request**
     
@@ -771,7 +895,32 @@
     
     **Parameters**
     
+    ```http request
+    answer: 没有，滚。
+    answerer_uuid: 7aa4b10e277f4d4c820571b848b7e60d
+    ```
+    
     **Response**
+    
+    ```json
+    {
+        "code": 200,
+        "message": "success",
+        "data": {
+            "region": "320100",
+            "asker_uuid": "08af02a583424620966b24156a58ea9f",
+            "theme": "母猪的产后护理",
+            "category": null,
+            "tag": null,
+            "status": 1,
+            "content": "想要咨询一下东南大学有母猪产后护理专业吗？在江苏省多少分能上啊？",
+            "vote": 1,
+            "answer": "没有，滚。",
+            "answerer_uuid": "7aa4b10e277f4d4c820571b848b7e60d",
+            "uuid": "befdb25be4934f1eb9613c2e5c1392cb"
+        }
+    }
+    ```
 
 
 ### Notification

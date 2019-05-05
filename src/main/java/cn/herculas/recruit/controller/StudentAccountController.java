@@ -6,7 +6,6 @@ import cn.herculas.recruit.exception.RecruitException;
 import cn.herculas.recruit.form.StudentAccountForm;
 import cn.herculas.recruit.service.StudentRegistrationService;
 import cn.herculas.recruit.util.parser.StudentAccountParser;
-import cn.herculas.recruit.util.replicator.PropertyReplicator;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -61,7 +60,7 @@ public class StudentAccountController {
         }
     }
 
-    @PatchMapping("/password")
+    @PatchMapping("/index/password")
     public ResultVO updateStudentAccountPassword(@RequestParam("old_password") String oldPassword,
                                                  @RequestParam("password") String newPassword,
                                                  @RequestParam("uuid") String studentUuid) {

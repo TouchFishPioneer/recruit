@@ -60,7 +60,7 @@ public class TeacherAccountController {
         }
     }
 
-    @PatchMapping("/password")
+    @PatchMapping("/index/password")
     public ResultVO updateTeacherAccountPassword(@RequestParam("old_password") String oldPassword,
                                                  @RequestParam("password") String newPassword,
                                                  @RequestParam("uuid") String teacherUuid) {

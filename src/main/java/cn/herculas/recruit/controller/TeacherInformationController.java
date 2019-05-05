@@ -7,7 +7,6 @@ import cn.herculas.recruit.exception.RecruitException;
 import cn.herculas.recruit.form.TeacherDetailForm;
 import cn.herculas.recruit.service.TeacherInformationService;
 import cn.herculas.recruit.util.parser.TeacherDetailParser;
-import cn.herculas.recruit.util.replicator.PropertyReplicator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -36,7 +35,7 @@ public class TeacherInformationController {
 
         Page<TeacherDetail> teacherDetailPage = teacherInformationService.listTeacherDetail(PageRequest.of(page, size));
         List<TeacherDetailVO> teacherDetailVOList = new ArrayList<>();
-        for (TeacherDetail teacherDetail : teacherDetailPage.getContent()) {
+        for (TeacherDetail teacherDetail : teacherDetailPage) {
             teacherDetailVOList.add(TeacherDetailParser.viewParser(teacherDetail));
         }
         return ResultVO.success(teacherDetailVOList);
