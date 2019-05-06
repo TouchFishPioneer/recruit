@@ -31,4 +31,5 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.10.5'
     runtime 'io.jsonwebtoken:jjwt-impl:0.10.5'
     runtime 'io.jsonwebtoken:jjwt-jackson:0.10.5'
+    implementation 'com.alibaba:fastjson:1.2.58'
 }
