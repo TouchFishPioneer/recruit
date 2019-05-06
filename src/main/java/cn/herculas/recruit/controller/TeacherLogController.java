@@ -27,7 +27,9 @@ public class TeacherLogController {
     private final TeacherRegistrationService teacherRegistrationService;
     private final JsonWebTokenService jsonWebTokenService;
 
-    public TeacherLogController(TeacherCaptchaService teacherCaptchaService, TeacherRegistrationService teacherRegistrationService, JsonWebTokenService jsonWebTokenService) {
+    public TeacherLogController(TeacherCaptchaService teacherCaptchaService,
+                                TeacherRegistrationService teacherRegistrationService,
+                                JsonWebTokenService jsonWebTokenService) {
         this.teacherCaptchaService = teacherCaptchaService;
         this.teacherRegistrationService = teacherRegistrationService;
         this.jsonWebTokenService = jsonWebTokenService;
@@ -42,7 +44,8 @@ public class TeacherLogController {
     }
 
     @GetMapping("/captcha/image")
-    public void getCaptchaImage(@RequestParam("key") String captchaKey, HttpServletResponse response) throws IOException {
+    public void getCaptchaImage(@RequestParam("key") String captchaKey,
+                                HttpServletResponse response) throws IOException {
         if (captchaKey == null) {
             response.setStatus(HttpStatus.BAD_REQUEST.value());
             return;

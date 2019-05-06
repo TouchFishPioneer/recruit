@@ -32,9 +32,11 @@ public class StudentInformationServiceImpl implements StudentInformationService 
                 studentDetailRepository.findByStudentAdmissionNumber(studentDetail.getStudentAdmissionNumber()) == null) {
             return studentDetailRepository.save(studentDetail);
         } else {
-            StudentDetail oldStudentDetail = studentDetailRepository.findByStudentIdentityNumber(studentDetail.getStudentIdentityNumber());
+            StudentDetail oldStudentDetail = studentDetailRepository
+                    .findByStudentIdentityNumber(studentDetail.getStudentIdentityNumber());
             if (oldStudentDetail == null)
-                oldStudentDetail = studentDetailRepository.findByStudentAdmissionNumber(studentDetail.getStudentAdmissionNumber());
+                oldStudentDetail = studentDetailRepository
+                        .findByStudentAdmissionNumber(studentDetail.getStudentAdmissionNumber());
 
             // 2. Teacher imported, and then student initialized
             if (oldStudentDetail.getStudentInfoSource().equals(StudentInfoSourceEnum.IMPORT.getCode())) {

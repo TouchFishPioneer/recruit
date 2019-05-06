@@ -60,7 +60,8 @@ public class QuestionServiceImpl implements QuestionService {
         if (question == null)
             throw new RecruitException(ExceptionStatusEnum.QUESTION_NOT_EXIST);
 
-        QuestionVote questionVote = questionVoteRepository.findByVoteQuestionUuidAndVoteStudentUuid(questionUuid, studentUuid);
+        QuestionVote questionVote = questionVoteRepository
+                .findByVoteQuestionUuidAndVoteStudentUuid(questionUuid, studentUuid);
 
         if (questionVote == null) {
             QuestionVote newVote = new QuestionVote();

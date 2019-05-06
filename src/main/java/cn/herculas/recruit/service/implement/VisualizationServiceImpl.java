@@ -43,7 +43,7 @@ public class VisualizationServiceImpl implements VisualizationService {
         String list = stringRedisTemplate.opsForValue().get(regionKey);
         if (list == null) {
             return DatabasePenetrator
-                    .databasePenetrator(
+                    .statisticsPenetrator(
                             studentDetailRepository::groupByStudentRegion,
                             stringRedisTemplate,
                             regionKey,
@@ -58,7 +58,7 @@ public class VisualizationServiceImpl implements VisualizationService {
         String list = stringRedisTemplate.opsForValue().get(divisionKey);
         if (list == null) {
             return DatabasePenetrator
-                    .databasePenetrator(
+                    .statisticsPenetrator(
                             studentDetailRepository::groupByStudentDivision,
                             stringRedisTemplate,
                             divisionKey,
@@ -73,7 +73,7 @@ public class VisualizationServiceImpl implements VisualizationService {
         String list = stringRedisTemplate.opsForValue().get(contactKey);
         if (list == null) {
             return DatabasePenetrator
-                    .databasePenetrator(
+                    .statisticsPenetrator(
                             studentDetailRepository::groupByStudentContactStatus,
                             stringRedisTemplate,
                             contactKey,
@@ -88,7 +88,7 @@ public class VisualizationServiceImpl implements VisualizationService {
         String list = stringRedisTemplate.opsForValue().get(gradeKey);
         if (list == null) {
             return DatabasePenetrator
-                    .databasePenetrator(
+                    .statisticsPenetrator(
                             studentDetailRepository::groupByStudentGrade,
                             stringRedisTemplate,
                             gradeKey,
